@@ -1,41 +1,41 @@
-#Guía paso a paso para instalar Docker en Ubuntu:
+Guía paso a paso para instalar Docker en Ubuntu:
 
-### Paso 1: Actualizar el sistema
+ Paso 1: Actualizar el sistema
 Primero, actualiza el índice de paquetes de tu sistema para asegurarte de que tienes los paquetes más recientes.
 
 sudo apt update
 
-### Paso 2: Instalar los paquetes requeridos
+ Paso 2: Instalar los paquetes requeridos
 Instala los paquetes que permiten a `apt` usar paquetes HTTPS:
 
 sudo apt install apt-transport-https ca-certificates curl software-properties-common
 
-### Paso 3: Agregar la clave GPG de Docker
+ Paso 3: Agregar la clave GPG de Docker
 Añade la clave GPG oficial de Docker para verificar la autenticidad del repositorio:
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
-### Paso 4: Agregar el repositorio de Docker
+ Paso 4: Agregar el repositorio de Docker
 Añade el repositorio de Docker a las fuentes de tu sistema:
 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-### Paso 5: Actualizar nuevamente el índice de paquetes
+ Paso 5: Actualizar nuevamente el índice de paquetes
 Actualiza nuevamente el índice de paquetes para incluir los paquetes de Docker:
 
 sudo apt update
 
-### Paso 6: Instalar Docker
+ Paso 6: Instalar Docker
 Ahora puedes instalar Docker con el siguiente comando:
 
 sudo apt install docker-ce
 
-### Paso 7: Verificar la instalación de Docker
+ Paso 7: Verificar la instalación de Docker
 Para confirmar que Docker se instaló correctamente, ejecuta:
 
 docker --version
 
-### Paso 8: Ejecutar Docker sin sudo (opcional)
+ Paso 8: Ejecutar Docker sin sudo (opcional)
 Si deseas usar Docker sin tener que usar `sudo` cada vez, añade tu usuario al grupo de Docker:
 
 sudo usermod -aG docker ${USER}
@@ -44,7 +44,7 @@ Luego, cierra la sesión y vuelve a iniciarla para que los cambios surtan efecto
 
 newgrp docker
 
-### Paso 9: Probar Docker
+ Paso 9: Probar Docker
 Para asegurarte de que Docker está funcionando correctamente, ejecuta el contenedor de prueba de Docker:
 
 docker run hello-world
