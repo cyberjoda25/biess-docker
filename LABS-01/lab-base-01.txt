@@ -9,7 +9,6 @@
 2. Crear 'index.html':
    Crea el archivo 'index.html' con el contenido HTML básico que has proporcionado.
 
-   html
    <!DOCTYPE html>
    <html>
    <head>
