@@ -1,34 +1,51 @@
-Docker instalación - Ubuntu/Debian
+#Guía paso a paso para instalar Docker en Ubuntu:
 
-1. Entorno
+### Paso 1: Actualizar el sistema
+Primero, actualiza el índice de paquetes de tu sistema para asegurarte de que tienes los paquetes más recientes.
 
-Paquetes y dependencias
+sudo apt update
 
-$ sudo apt update && sudo apt install apt-transport-https ca-certificates curl gnupg2  software-properties-common
+### Paso 2: Instalar los paquetes requeridos
+Instala los paquetes que permiten a `apt` usar paquetes HTTPS:
 
-Importar llave de repositorio
-$ sudo curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
 
-Agregar repo
-$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+### Paso 3: Agregar la clave GPG de Docker
+Añade la clave GPG oficial de Docker para verificar la autenticidad del repositorio:
 
-Actualizar base de datos de paquetes
-$ sudo apt update
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
-2. Instlar Docker
+### Paso 4: Agregar el repositorio de Docker
+Añade el repositorio de Docker a las fuentes de tu sistema:
 
-Docker engine
-$ sudo apt-get install docker-ce docker-ce-cli containerd.io
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-3. Permisos de ejecuión
+### Paso 5: Actualizar nuevamente el índice de paquetes
+Actualiza nuevamente el índice de paquetes para incluir los paquetes de Docker:
 
-Para ejecutar comandos docker hay que ser administrador o tener permisos sudo, una alternativa a poder usar docker como usuario normal es agregar a nuestro usuario al grupo docker.
-$ sudo gpasswd -a $USER docker
+sudo apt update
 
-Para que los cambios sean efectivos debemos volver a loguearnos en el sistema.
+### Paso 6: Instalar Docker
+Ahora puedes instalar Docker con el siguiente comando:
 
-4. Test
+sudo apt install docker-ce
 
-Ejecutar un contenedor 'hello-world'
+### Paso 7: Verificar la instalación de Docker
+Para confirmar que Docker se instaló correctamente, ejecuta:
 
-$ docker run hello-world
+docker --version
+
+### Paso 8: Ejecutar Docker sin sudo (opcional)
+Si deseas usar Docker sin tener que usar `sudo` cada vez, añade tu usuario al grupo de Docker:
+
+sudo usermod -aG docker ${USER}
+
+Luego, cierra la sesión y vuelve a iniciarla para que los cambios surtan efecto o ejecuta:
+
+newgrp docker
+
+### Paso 9: Probar Docker
+Para asegurarte de que Docker está funcionando correctamente, ejecuta el contenedor de prueba de Docker:
+
+docker run hello-world
+Si ves un mensaje de bienvenida de Docker, ¡has instalado Docker exitosamente!
