@@ -1,37 +1,28 @@
-Docker wordpress
-
-Para este laboratorio precisamos 2 contendores, uno con un servicio de bases de datos y el otro con wordpress.
-
-1. Mariadb (msyql)
+Paso 1: Iniciar el contenedor de MariaDB
+Este contenedor de MariaDB se encargará de la base de datos de WordPress.
 
 docker run \
-
     -e MYSQL_ROOT_PASSWORD=abc1234 \
-
     -e MYSQL_DATABASE=wp_dbase \
-
     --name wordpressdb \
-
     -v /opt/diario.net/mysql:/var/lib/mysql \
-
     -d mariadb:latest
 
 
-2. Wordpress
-$ docker run \
+Paso 2: Iniciar el contenedor de WordPress
+Este contenedor ejecutará WordPress y se conectará al contenedor de MariaDB para la base de datos.
 
+
+docker run \
     -e WORDPRESS_DB_PASSWORD=abc1234 \
-
     -e WORDPRESS_DB_USER=root \
-
     -e WORDPRESS_DB_NAME=wp_dbase \
-
     --name diario.net \
-
     --link wordpressdb:mysql \
-
     -p 80:80 \
-
     -v /opt/diario.net/wordpress:/var/www/html \
-
     -d wordpress
+
+
+Acceder a WordPress
+Con estos contenedores en funcionamiento, puedes acceder a WordPress desde tu navegador en http://localhost o en la IP de tu servidor. 
