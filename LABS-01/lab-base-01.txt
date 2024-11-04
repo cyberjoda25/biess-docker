@@ -1,30 +1,51 @@
-1- Crear directorio de trabajo
-2- Crear index.html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Página Básica de Ejemplo</title>
-</head>
-<body>
-    <h1>Hola desde Docker y Apache</h1>
-    <p>Esta es una página HTML básica servida por un contenedor de Docker con Apache.</p>
-</body>
-</html>
+1. Crear el directorio de trabajo:
+   Este directorio contendrá todos los archivos que necesitas, incluyendo 'index.html' y el 'Dockerfile'.
 
+   
+   mkdir mi-apache
+   cd mi-apache
+   
 
-3- Crear archivo Dockerfile
-# Utiliza la imagen base de Apache
-FROM httpd:2.4
+2. Crear 'index.html':
+   Crea el archivo 'index.html' con el contenido HTML básico que has proporcionado.
 
-# Copia el archivo index.html al directorio de documentos del servidor Apache
-COPY index.html /usr/local/apache2/htdocs/
+   html
+   <!DOCTYPE html>
+   <html>
+   <head>
+       <title>Página Básica de Ejemplo</title>
+   </head>
+   <body>
+       <h1>Hola desde Docker y Apache</h1>
+       <p>Esta es una página HTML básica servida por un contenedor de Docker con Apache.</p>
+   </body>
+   </html>
+   
 
+3. Crear el archivo 'Dockerfile':
+   Este Dockerfile usa la imagen de Apache (httpd) como base y copia el archivo 'index.html' en el directorio de documentos de Apache.
 
-4- Construir mi imagen
-docker build -t mi-apache-basico .
+   dockerfile
+    Utiliza la imagen base de Apache
+   FROM httpd:2.4
 
+    Copia el archivo index.html al directorio de documentos del servidor Apache
+   COPY index.html /usr/local/apache2/htdocs/
+   
 
-5- Levantar contenedor:
-docker run -d -p 8080:80 mi-apache-basico
+4. Construir la imagen de Docker:
+   Ejecuta el comando para construir tu imagen, etiquetándola como 'mi-apache-basico'.
 
+   
+   docker build -t mi-apache-basico .
+   
 
+5. Levantar el contenedor:
+   Usa el siguiente comando para ejecutar el contenedor, exponiendo el puerto 8080 en tu máquina local para que redirija al puerto 80 del contenedor (donde Apache está escuchando por defecto).
+
+   
+   docker run -d -p 8080:80 mi-apache-basico
+   
+
+ Probar la configuración
+Abre tu navegador y dirígete a 'http://localhost:8080'. Si todo está configurado correctamente, deberías ver tu página HTML con el mensaje "Hola desde Docker y Apache".
