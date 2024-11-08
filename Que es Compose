@@ -1,0 +1,28 @@
+Docker Compose es una herramienta que facilita la creación y gestión de múltiples contenedores Docker como un solo servicio. Con Docker Compose, puedes definir y ejecutar aplicaciones en contenedores de manera más organizada, especialmente cuando una aplicación necesita múltiples contenedores que interactúan entre sí, como un servicio web con una base de datos.
+
+¿Qué es Docker Compose?
+Docker Compose permite:
+
+Definir la configuración de múltiples contenedores en un solo archivo (docker-compose.yml), lo que hace que sea más fácil replicar y gestionar la configuración de una aplicación completa.
+Ejecutar múltiples contenedores con un solo comando (docker-compose up), iniciando todos los servicios definidos en el archivo Compose.
+Automatizar el ciclo de vida de contenedores, gestionando tareas como la creación, ejecución, conexión y escalado de contenedores en conjunto.
+En el archivo docker-compose.yml, defines cada servicio, sus imágenes, variables de entorno, redes, volúmenes y dependencias entre ellos.
+
+Diferencias Entre Docker y Docker Compose
+Característica	Docker	Docker Compose
+Propósito	Ejecutar contenedores de manera individual	Administrar múltiples contenedores como un solo servicio
+Configuración	Cada contenedor se configura y ejecuta con un comando separado	Usa un archivo YAML (docker-compose.yml) para definir varios servicios
+Comando de Ejecución	docker run para cada contenedor	docker-compose up para todos los servicios en el archivo Compose
+Dependencias	No maneja dependencias automáticamente entre contenedores	Define dependencias y garantiza el orden de inicio
+Escalabilidad	Limitado a un contenedor por comando	Escala fácilmente con docker-compose up --scale <servicio>=<n>
+Archivo de Configuración	Opcional y simple (Dockerfile para crear imágenes)	Archivo YAML (docker-compose.yml) que define servicios, redes y volúmenes
+Ejemplo de Uso
+Sin Docker Compose: Para una aplicación con una base de datos y un servidor web, tendrías que ejecutar cada contenedor por separado:
+
+docker run -d --name db mysql:5.7
+docker run -d --name web --link db:db -p 8080:80 php:7.4-apache
+Con Docker Compose: Con un archivo docker-compose.yml, puedes iniciar ambos contenedores y sus configuraciones con un solo comando.
+
+docker-compose up -d
+Conclusión
+Docker Compose es ideal para gestionar aplicaciones que requieren múltiples contenedores que deben configurarse, ejecutarse y coordinarse juntos.
