@@ -1,25 +1,35 @@
-Guía para instalar Docker Compose en Ubuntu:
+Manual de Instalación de Docker Compose en Ubuntu
+Paso 1: Obtener la Última Versión de Docker Compose
+Abre una terminal y ejecuta el siguiente comando para obtener la última versión disponible de Docker Compose:
 
-Paso 1: Descargar la última versión de Docker Compose
-Primero, descarga la última versión de Docker Compose. Puedes verificar la versión más reciente en [la página de lanzamientos de GitHub de Docker Compose](https://github.com/docker/compose/releases). En este ejemplo, usaremos la versión `2.31.1`.
+bash
+Copiar código
+curl -s https://api.github.com/repos/docker/compose/releases/latest | grep -Po '"tag_name": "\K[^\"]+'
+Esto mostrará la versión más reciente, por ejemplo, v2.31.1. Anota esta versión, ya que la usarás en el siguiente paso.
 
-sudo curl -L "https://github.com/docker/compose/releases/download/2.31.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+Paso 2: Descargar Docker Compose
+Sustituye <version> con la versión obtenida en el paso anterior y ejecuta el siguiente comando para descargar Docker Compose:
 
-Paso 2: Hacer el archivo ejecutable
-Otorga permisos de ejecución al binario de Docker Compose:
+bash
+Copiar código
+sudo curl -L "https://github.com/docker/compose/releases/download/<version>/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+Ejemplo: Si la última versión es v2.31.1, el comando sería:
 
+bash
+Copiar código
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.31.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+Paso 3: Hacer el Archivo Ejecutable
+Otorga permisos de ejecución al archivo descargado:
+
+bash
+Copiar código
 sudo chmod +x /usr/local/bin/docker-compose
+Paso 4: Verificar la Instalación
+Finalmente, verifica si Docker Compose está instalado correctamente ejecutando:
 
-Paso 3: Verificar la instalación
-Para asegurarte de que Docker Compose se instaló correctamente, verifica la versión instalada:
+bash
+Copiar código
+/usr/local/bin/docker-compose --version
+Deberías ver la versión de Docker Compose instalada, confirmando que la instalación fue exitosa.
 
-docker-compose --version
-
-Deberías ver la versión de Docker Compose, lo cual confirma que la instalación fue exitosa.
-
-Paso 4: Opcional – Crear un enlace simbólico
-Si `docker-compose` no está disponible en el PATH, puedes crear un enlace simbólico en `/usr/bin`:
-
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-
-Con estos pasos, ya deberías tener Docker Compose instalado y listo para usar en Ubuntu.
+Con estos pasos, tienes Docker Compose instalado y listo para usar en Ubuntu.
