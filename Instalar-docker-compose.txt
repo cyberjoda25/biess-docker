@@ -23,3 +23,6 @@ Finalmente, verifica si Docker Compose está instalado correctamente ejecutando:
 Deberías ver la versión de Docker Compose instalada, confirmando que la instalación fue exitosa.
 
 Con estos pasos, tienes Docker Compose instalado y listo para usar en Ubuntu.
+
+Eliminar
+sudo rm /usr/local/bin/docker-compose
